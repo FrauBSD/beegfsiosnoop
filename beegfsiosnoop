@@ -4,7 +4,7 @@
 #
 # $Title: Script to snoop on BeeGFS I/O under Linux $
 # $Copyright: 2020 Devin Teske. All rights reserved. $
-# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 12:48:40 -0800 freebsdfrau $
+# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 12:50:17 -0800 freebsdfrau $
 #
 ############################################################ DEFAULTS
 
@@ -12,7 +12,7 @@ DEFAULT_TIME_FMT="%Y %b %e %T"
 
 ############################################################ GLOBALS
 
-VERSION='$Version: 1.0-alpha-2 $'
+VERSION='$Version: 1.0-alpha-3 $'
 
 pgm="${0##*/}" # Program basename
 
@@ -321,7 +321,7 @@ if [ ! "$DEBUG" ]; then
 		echo "Must be root!" >&2
 		exit $FAILURE
 	fi
-	info "Tracing NFS... Hit Ctrl-C to end."
+	info "Tracing BeeGFS... Hit Ctrl-C to end."
 fi
 
 #
