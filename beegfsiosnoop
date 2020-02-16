@@ -2,9 +2,9 @@
 # vi: set ft=sh noet ts=8 sw=8 :: Vi/ViM
 ############################################################ IDENT(1)
 #
-# $Title: Script to snoop on NFS I/O under Linux $
+# $Title: Script to snoop on BeeGFS I/O under Linux $
 # $Copyright: 2020 Devin Teske. All rights reserved. $
-# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 12:35:28 -0800 freebsdfrau $
+# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 12:48:40 -0800 freebsdfrau $
 #
 ############################################################ DEFAULTS
 
@@ -12,7 +12,7 @@ DEFAULT_TIME_FMT="%Y %b %e %T"
 
 ############################################################ GLOBALS
 
-VERSION='$Version: 1.0-alpha-1 $'
+VERSION='$Version: 1.0-alpha-2 $'
 
 pgm="${0##*/}" # Program basename
 
@@ -434,7 +434,7 @@ fi
 	fi
 
 	#
-	# Find open NFS *file* descriptors
+	# Find open BeeGFS *file* descriptors
 	#
 	if [ ! "$IGNORE_RUNNING$DEBUG" ]; then
 		info "Gathering open file-descriptor info ..."
@@ -655,7 +655,7 @@ cat <<PROBE
 		\$fstype = \$type->name;
 
 		//
-		// Test for NFS
+		// Test for BeeGFS
 		//
 		if (str(\$fstype, 3) == "nfs") {
 			@vfs_${name}_nfs[tid] = 1; // Flag for $exit_func
@@ -1042,12 +1042,12 @@ EOF
 
 	call == "exit_open" || call == "exit_openat" {
 		if (NF < 7) next # Malformed input
-		if ($7 != 1) { # Not NFS
+		if ($7 != 1) { # Not BeeGFS
 			if (show_paths)
 				delete filename_cache[pid]
 			next
 		}
-		# NFS
+		# BeeGFS
 		callname = substr(call, 6)
 		if (show_paths) {
 			filename = filename_cache[pid]
