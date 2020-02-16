@@ -9,7 +9,7 @@ Group: Applications/FrauBSD
 
 Summary: beegfsiosnoop
 License: BSD
-Version: 1.0
+Version: 1.0.1
 Release: 1
 Buildarch: noarch
 
@@ -78,5 +78,7 @@ WWW: https://www.fraubsd.org/beegfsiosnoop
 
 
 %changelog
+* Fri Feb 16 2020 Devin Teske <dteske@fraubsd.org> 1.0.1-1
+- 28c188b Reduce diff between nfsiosnoop
 * Fri Feb 16 2020 Devin Teske <dteske@fraubsd.org> 1.0-1
 - Package created.
