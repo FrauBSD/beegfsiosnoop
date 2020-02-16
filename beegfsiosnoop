@@ -4,7 +4,7 @@
 #
 # $Title: Script to snoop on BeeGFS I/O under Linux $
 # $Copyright: 2020 Devin Teske. All rights reserved. $
-# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 12:58:22 -0800 freebsdfrau $
+# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 13:25:24 -0800 freebsdfrau $
 #
 ############################################################ DEFAULTS
 
@@ -12,7 +12,7 @@ DEFAULT_TIME_FMT="%Y %b %e %T"
 
 ############################################################ GLOBALS
 
-VERSION='$Version: 1.0 $'
+VERSION='$Version: 1.0.1 $'
 
 pgm="${0##*/}" # Program basename
 
@@ -321,7 +321,7 @@ if [ ! "$DEBUG" ]; then
 		echo "Must be root!" >&2
 		exit $FAILURE
 	fi
-	info "Tracing BeeGFS... Hit Ctrl-C to end."
+	info "Tracing I/O... Hit Ctrl-C to end."
 fi
 
 #
@@ -434,7 +434,7 @@ fi
 	fi
 
 	#
-	# Find open BeeGFS *file* descriptors
+	# Find open *file* descriptors
 	#
 	if [ ! "$IGNORE_RUNNING$DEBUG" ]; then
 		info "Gathering open file-descriptor info ..."
@@ -698,7 +698,7 @@ cat <<PROBE
 		\$fstype = \$type->name;
 
 		//
-		// Test for BeeGFS
+		// Test filesystem type
 		//
 		if (str(\$fstype, 6) == "beegfs") {
 			@vfs_${name}_trace[tid] = 1; // Flag for $exit_func
@@ -1085,12 +1085,12 @@ EOF
 
 	call == "exit_open" || call == "exit_openat" {
 		if (NF < 7) next # Malformed input
-		if ($7 != 1) { # Not BeeGFS
+		if ($7 != 1) { # Ignored filesystem type
 			if (show_paths)
 				delete filename_cache[pid]
 			next
 		}
-		# BeeGFS
+		# Traced filesystem type
 		callname = substr(call, 6)
 		if (show_paths) {
 			filename = filename_cache[pid]
