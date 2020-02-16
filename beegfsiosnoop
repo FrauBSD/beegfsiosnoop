@@ -4,7 +4,7 @@
 #
 # $Title: Script to snoop on BeeGFS I/O under Linux $
 # $Copyright: 2020 Devin Teske. All rights reserved. $
-# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 12:50:17 -0800 freebsdfrau $
+# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 12:51:37 -0800 freebsdfrau $
 #
 ############################################################ DEFAULTS
 
@@ -12,7 +12,7 @@ DEFAULT_TIME_FMT="%Y %b %e %T"
 
 ############################################################ GLOBALS
 
-VERSION='$Version: 1.0-alpha-3 $'
+VERSION='$Version: 1.0-alpha-4 $'
 
 pgm="${0##*/}" # Program basename
 
@@ -657,7 +657,7 @@ cat <<PROBE
 		//
 		// Test for BeeGFS
 		//
-		if (str(\$fstype, 3) == "nfs") {
+		if (str(\$fstype, 6) == "beegfs") {
 			@vfs_${name}_nfs[tid] = 1; // Flag for $exit_func
 		}
 	}
