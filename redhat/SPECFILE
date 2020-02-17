@@ -9,7 +9,7 @@ Group: Applications/FrauBSD
 
 Summary: beegfsiosnoop
 License: BSD
-Version: 1.0.2
+Version: 1.0.3
 Release: 1
 Buildarch: noarch
 
@@ -78,6 +78,8 @@ WWW: https://www.fraubsd.org/beegfsiosnoop
 
 
 %changelog
+* Sun Feb 16 2020 Devin Teske <dteske@fraubsd.org> 1.0.3-1
+- 04cfd51 Whitespace
 * Sun Feb 16 2020 Devin Teske <dteske@fraubsd.org> 1.0.2-1
 - fbf1e8f Use getword() to extract map/fd tuple values
 - d95d3b5 Refactor map id extraction
