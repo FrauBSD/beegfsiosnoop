@@ -4,7 +4,7 @@
 #
 # $Title: Script to snoop on BeeGFS I/O under Linux $
 # $Copyright: 2020 Devin Teske. All rights reserved. $
-# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 19:47:01 -0800 freebsdfrau $
+# $FrauBSD: beegfsiosnoop/beegfsiosnoop 2020-02-16 19:48:45 -0800 freebsdfrau $
 #
 ############################################################ DEFAULTS
 
@@ -12,7 +12,7 @@ DEFAULT_TIME_FMT="%Y %b %e %T"
 
 ############################################################ GLOBALS
 
-VERSION='$Version: 1.0.2-alpha-7 $'
+VERSION='$Version: 1.0.2-alpha-8 $'
 
 pgm="${0##*/}" # Program basename
 
@@ -482,12 +482,20 @@ fi
 			delete mounts
 			file = "/proc/mounts"
 			nmounts = 0
+			root_mount = ""
 			while (getline < file > 0) {
 				if ($3 != "beegfs") continue
-				mounts[++nmounts] = $2
-				sub("/+$", "", mounts[nmounts])
+				if ($2 == "/") {
+					root_mount = $2
+				} else {
+					mounts[++nmounts] = $2
+					sub("/+$", "", mounts[nmounts])
+				}
 			}
 			close(file)
+			if (root_mount != "") {
+				mounts[++nmounts] = root_mount
+			}
 		}
 
 		######################################## FUNCTIONS
@@ -541,9 +549,11 @@ fi
 				mnt = mounts[n]
 				len = length(mnt)
 				pre = substr(name, 1, len + 1)
-				if (name != mnt && pre != mnt "/") continue
-				matched = 1
-				break
+				if (mnt == "/" && name ~ "^/")
+					matched = 1
+				else if (name == mnt || pre == mnt "/")
+					matched = 1
+				if (matched) break
 			}
 			if (!matched) next
 
