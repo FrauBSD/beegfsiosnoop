@@ -9,7 +9,7 @@ Group: Applications/FrauBSD
 
 Summary: beegfsiosnoop
 License: BSD
-Version: 1.0.1
+Version: 1.0.2
 Release: 1
 Buildarch: noarch
 
@@ -78,7 +78,20 @@ WWW: https://www.fraubsd.org/beegfsiosnoop
 
 
 %changelog
-* Fri Feb 16 2020 Devin Teske <dteske@fraubsd.org> 1.0.1-1
+* Sun Feb 16 2020 Devin Teske <dteske@fraubsd.org> 1.0.2-1
+- fbf1e8f Use getword() to extract map/fd tuple values
+- d95d3b5 Refactor map id extraction
+- 25fc17e Refactor clearing of function-specific maps
+- 5febc81 Prevent duplicate reporting
+- 4b73ba3 Fix handling of beegfs root mounted filesystem
+- 24804b6 Fix an off-by-one error
+- 524ce18 Explicitly skip lsof header
+- d983850 Add ability to send info msgs from lsof processor
+- f0a80f3 Send informational messages after loading, not before
+- 045e548 Prevent NULL caching
+- 6a03873 Comments and whitespace
+- 6ac13f9 Add delimiter support to count()
+* Sun Feb 16 2020 Devin Teske <dteske@fraubsd.org> 1.0.1-1
 - 28c188b Reduce diff between nfsiosnoop
-* Fri Feb 16 2020 Devin Teske <dteske@fraubsd.org> 1.0-1
+* Sun Feb 16 2020 Devin Teske <dteske@fraubsd.org> 1.0-1
 - Package created.
