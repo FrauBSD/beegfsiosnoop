@@ -2,7 +2,7 @@
 #
 # $Title: Makefile for installing beegfsiosnoop $
 # $Copyright: 2020 Devin Teske. All rights reserved. $
-# $FrauBSD: beegfsiosnoop/GNUmakefile 2020-02-16 13:01:04 -0800 freebsdfrau $
+# $FrauBSD: beegfsiosnoop/GNUmakefile 2020-04-17 15:31:02 -0700 freebsdfrau $
 #
 ############################################################ CONFIGURATION
 
@@ -17,7 +17,7 @@ RM_F=		rm -f
 
 ############################################################ OBJECTS
 
-BEEGFSIOSNOOP=	beegfsiosnoop
+PROG=		beegfsiosnoop
 
 ############################################################ TARGETS
 
@@ -28,10 +28,10 @@ all:
 
 install:
 	$(MKDIR_P) $(BINDIR)
-	$(CP_F) $(BEEGFSIOSNOOP) $(BINDIR)/
+	$(CP_F) $(PROG) $(BINDIR)/
 
 uninstall:
-	$(RM_F) $(BINDIR)/$(BEEGFSIOSNOOP)
+	$(RM_F) $(BINDIR)/$(PROG)
 
 ################################################################################
 # END
